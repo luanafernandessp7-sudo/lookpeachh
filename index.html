@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um Pote de Amor Para Você! ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Quicksand para um visual arredondado e fofo, e Playfair Display para toques elegantes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome para ícones fofos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffe4e6 0%, #fecdd3 50%, #fda4af 100%);
+            overflow-x: hidden;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Animação de pulso suave para corações e estrelas */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+        .heartbeat-animation {
+            animation: heartbeat 1.5s infinite;
+        }
+        /* Estrelas e Corações flutuantes no fundo */
+        .floating-heart {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 6s linear forwards;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Transições personalizadas */
+        .transition-all-300 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between text-slate-800 relative py-6 px-4">
+
+    <!-- Container de Elementos Flutuantes de Fundo -->
+    <div id="bg-hearts-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Barra Superior / Tocador de Música Procedural -->
+    <header class="w-full max-w-4xl flex justify-between items-center z-10 px-4 mb-4">
+        <div class="flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-pink-200/50 shadow-sm">
+            <span class="text-pink-500 heartbeat-animation"><i class="fa-solid fa-heart"></i></span>
+            <span class="text-xs sm:text-sm font-semibold text-pink-700">Feito especialmente para você</div>
+        <!-- Botão de Música Box Lofi Sintetizada -->
+        <button id="btn-music" onclick="toggleMusic()" class="flex items-center gap-2 bg-white/80 hover:bg-pink-100 backdrop-blur-md px-4 py-2 rounded-full border border-pink-200 shadow-md transition-all duration-300 text-xs sm:text-sm font-semibold text-pink-600">
+            <i id="music-icon" class="fa-solid fa-music-alt"></i>
+            <span id="music-text">Caixinha de musica
+        </button>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="w-full max-w-4xl flex-grow flex flex-col items-center justify-center z-10 gap-8 my-4">
+        
+        <!-- Bloco de Boas-Vindas Principal -->
+        <div class="text-center px-4 max-w-2xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-pink-600 mb-3 drop-shadow-sm serif-font italic">
+                Olá, Minha Lookpeach! 
+            </h1>
+            <p class="text-base sm:text-lg text-pink-800 font-medium">
+                Este cantinho foi feito exclusivamente para colocar um sorriso no seu rosto e te lembrar do quão incrível você é. Explore as atividades interativas de carinho abaixo! 👇
+            </p>
+        </div>
+
+        <!-- Tabuleiro de Recursos Interativos (Grid) -->
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
+            
+            <!-- CARD 1: O Pote de Mensagens Quentinhas -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-jar animate-bounce"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">O Pote dos Afetos</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Clique no pote para retirar uma mensagem quentinha de amor e carinho feita especialmente para você.
+                    </p>
+                </div>
+                
+                <!-- Área de exibição do bilhete -->
+                <div id="jar-message-box" class="w-full min-h-[90px] flex items-center justify-center bg-rose-50/50 rounded-2xl border border-dashed border-rose-200 p-4 mb-4 transition-all duration-300">
+                    <p id="jar-text" class="text-sm sm:text-base text-rose-800 italic font-semibold">"você é tão bonita, e isso é a coisa menos interesante sobre você "</p>
+                </div>
+
+                <button onclick="drawLoveMessage(event)" class="w-full py-3 px-6 bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Retirar um Bilhete
+                </button>
+            </div>
+
+            <!-- CARD 2: Teclado de Piano de Corações (Musical!) -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Piano do Amor</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Toque as notas abaixo para criar uma melodia doce. Cada nota solta um coração colorido brilhante!
+                    </p>
+                </div>
+
+                <!-- Teclado Visual -->
+                <div class="flex justify-center gap-2 sm:gap-3 my-4 w-full">
+                    <button onclick="playPianoNote(261.63, '#ef4444', 'C')" class="w-10 sm:w-12 h-16 sm:h-20 bg-rose-400 hover:bg-rose-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">C</button>
+                    <button onclick="playPianoNote(293.66, '#f97316', 'D')" class="w-10 sm:w-12 h-16 sm:h-20 bg-orange-400 hover:bg-orange-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">D</button>
+                    <button onclick="playPianoNote(329.63, '#eab308', 'E')" class="w-10 sm:w-12 h-16 sm:h-20 bg-yellow-400 hover:bg-yellow-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">E</button>
+                    <button onclick="playPianoNote(349.23, '#22c55e', 'F')" class="w-10 sm:w-12 h-16 sm:h-20 bg-emerald-400 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">F</button>
+                    <button onclick="playPianoNote(392.00, '#3b82f6', 'G')" class="w-10 sm:w-12 h-16 sm:h-20 bg-blue-400 hover:bg-blue-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">G</button>
+                    <button onclick="playPianoNote(440.00, '#a855f7', 'A')" class="w-10 sm:w-12 h-16 sm:h-20 bg-purple-400 hover:bg-purple-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">A</button>
+                    <button onclick="playPianoNote(493.88, '#ec4899', 'B')" class="w-10 sm:w-12 h-16 sm:h-20 bg-pink-400 hover:bg-pink-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">B</button>
+                </div>
+                
+                <p class="text-xs text-rose-500/80 font-semibold animate-pulse">Dica: clique rápido nas notas para espalhar alegria!</p>
+            </div>
+
+            <!-- CARD 3: Cartinha de Amor Interativa (Envelope que abre) -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i id="envelope-icon" class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Carta Secreta para Você</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Uma cartinha secreta escrita com muito amor e carinho. Abra para ler!
+                    </p>
+                </div>
+
+                <!-- Conteúdo da Carta -->
+                <div class="w-full relative overflow-hidden transition-all duration-500 ease-in-out">
+                    <button onclick="toggleEnvelope(event)" class="py-2.5 px-5 bg-pink-100 hover:bg-pink-200 text-pink-700 text-xs sm:text-sm font-bold rounded-xl transition-all mb-3 flex items-center justify-center gap-2 mx-auto">
+                        <span id="envelope-btn-text">Ler a Cartinha</span>
+                    </button>
+                    
+                    <div id="letter-content" class="hidden max-h-[180px] overflow-y-auto bg-amber-50 border border-amber-200 p-4 rounded-xl text-left text-sm text-amber-900 shadow-inner scrollbar-thin scrollbar-thumb-pink-200">
+                        <p class="font-bold mb-1 serif-font text-base text-rose-700">Querida Rafa, 🌸</p>
+                        <p class="leading-relaxed mb-2">
+                            Quero te lembrar que você é uma pessoa brilhante e maravilhosa. Às vezes o mundo corre muito rápido, mas não se esqueça de respirar fundo, sorrir e se orgulhar de quem você é. nunca se esqueça que você não é apenas bonita, você fala bonita, você pensa bonita, existe da maneira mais bonita possivel.   
+                        </p
+                        <p class="leading-relaxed mb-2">
+                            Seu coração é imenso e sua presença torna as coisas ao seu redor muito mais leves e bonitas. Que sua vida seja tão doce e agradável quanto você!
+                        </p>
+                        <p class="text-right font-bold italic text-rose-600 serif-font">- Da sua fã número um 💕</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Joguinho Rápido "Chuva de Carinho" -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Jogo: Coletor de Amor</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Mova a cesta com o mouse ou deslizando o dedo para pegar os corações caindo e somar amor!
+                    </p>
+                </div>
+
+                <!-- Área do Jogo -->
+                <div class="relative w-full h-[150px] bg-rose-50/70 border border-pink-200 rounded-2xl overflow-hidden cursor-crosshair shadow-inner" id="game-container">
+                    <!-- Instruções sobrepostas no jogo -->
+                    <div id="game-start-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-white/90 z-20 transition-all duration-300">
+                        <p class="text-xs sm:text-sm font-semibold text-pink-700 mb-2">Ajude a cestinha a guardar corações!</p>
+                        <button onclick="startGame()" class="py-1.5 px-4 bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold rounded-lg shadow transition-all">Começar Jogo</button>
+                    </div>
+                    
+                    <canvas id="game-canvas" class="w-full h-full block"></canvas>
+                    
+                    <!-- Placar e Vidas -->
+                    <div class="absolute top-2 left-2 right-2 flex justify-between items-center text-xs font-bold text-pink-700 pointer-events-none z-10 bg-white/50 backdrop-blur-sm px-2 py-1 rounded">
+                        <span id="game-score">Pontos: 0</span>
+                        <span id="game-lives">❤️❤️❤️</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTÃO DO SPOTIFY (Inserido acima do rodapé) -->
+        <div class="w-full max-w-md px-4 mt-4 flex flex-col items-center">
+            <a href="https://open.spotify.com/playlist/0TNdeYoqDVbHuMZDKt6nrr?si=c3gi5M9FSUq3doNQBKUfcw" target="_blank" class="w-full py-3.5 px-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-3 border border-emerald-400/30">
+                <i class="fa-brands fa-spotify text-2xl"></i>
+                <div class="text-left leading-tight">
+                    <p class="text-xs uppercase font-extrabold tracking-wider opacity-90">Playlist feita com carinho para ti </p>
+                    <p class="text-sm">Ouvir Playlist Especial no Spotify 🎵</p>
+                </div>
+            </a>
+            <p class="text-[11px] text-pink-800/70 mt-1.5 italic font-medium">Prepara os fones de ouvido para curtir!</p>
+        </div>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="w-full text-center py-4 z-10">
+        <p class="text-xs text-pink-800 font-semibold flex items-center justify-center gap-1.5">
+            Feito com <i class="fa-solid fa-heart text-pink-500 heartbeat-animation"></i> por Luana para Rafaella. Te Amo Sempre!
+        </p>
+    </footer>
+
+    <!-- SISTEMA E INTERATIVIDADES DO SITE -->
+    <script>
+        // --- 1. CONFIGURAÇÕES E BANCO DE DADOS DE COMPLEMENTOS ---
+        const loveMessages = [
+
+            "d^b=[,7' .",
+            "Eu não consigo escolher quando e por quem tenho bons sentimentos. Mas tenho alguns bons sentimentos por voce!. ",
+            "Se a vida fosse flores eu sempre regaria elas para manter lindas e bonitas, igual meu amor por você! ✨",
+            "Seja gentil consigo mesmo hoje. Você está fazendo o seu melhor! 🌱",
+            "Você merece todo o amor, risos e momentos mágicos que o universo pode dar! 🌟",
+            "Eu não consigo escolher quando e por quem tenho bons sentimentos. Mas tenho alguns bons sentimentos por voce.",
+            "Você é uma combinação perfeita de talento, doçura e força! 🦄",
+            "Sua existência torna as vidas das pessoas ao seu redor muito mais leves e felizes. 💕",
+            "Seus pensamentos e ideias são brilhantes. Nunca pare de sonhar acordado! 💭",
+            "Sua risada é uma das melodias mais adoráveis que alguém poderia ouvir! 🎵",
+            "Você é incrível exatamente do jeitinho que é, com todas as suas particularidades! 🥰",
+            "Hoje é um dia lindo para ser feliz, se mimar um pouquinho e sorrir sem motivo! 🌸"
+        ];
+
+        let lastMessageIndex = -1;
+
+        function drawLoveMessage(event) {
+            let randomIndex;
+            // Garante que não repete a mensagem anterior imediatamente
+            do {
+                randomIndex = Math.floor(Math.random() * loveMessages.length);
+            } while (randomIndex === lastMessageIndex);
+            
+            lastMessageIndex = randomIndex;
+            
+            const textBox = document.getElementById('jar-message-box');
+            const textEl = document.getElementById('jar-text');
+            
+            // Efeito visual de troca de mensagem
+            textBox.style.opacity = '0';
+            textBox.style.transform = 'scale(0.95)';
+            
+            playSynthSound(523.25, 'sine', 0.1, 0.2); // Som fofo ao retirar papel do pote
+
+            setTimeout(() => {
+                textEl.innerText = `"${loveMessages[randomIndex]}"`;
+                textBox.style.opacity = '1';
+                textBox.style.transform = 'scale(1)';
+                
+                // Dispara alguns coraçõezinhos a partir do botão clicado
+                if (event && event.currentTarget) {
+                    const btnRect = event.currentTarget.getBoundingClientRect();
+                    for (let i = 0; i < 5; i++) {
+                        createFloatingHeart(
+                            btnRect.left + (btnRect.width / 2) + (Math.random() * 60 - 30),
+                            btnRect.top + window.scrollY,
+                            ['#ec4899', '#f43f5e', '#f472b6', '#fda4af'][Math.floor(Math.random() * 4)]
+                        );
+                    }
+                }
+            }, 200);
+        }
+
+        // --- 2. SISTEMA DE AUDIO (Web Audio API - Sem dependências externas!) ---
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let musicInterval = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Função genérica de sintetizador para efeitos sonoros
+        function playSynthSound(frequency, type = 'sine', volume = 0.1, duration = 0.3) {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            osc.type = type;
+            osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+            gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+            // Decay suave (redução de volume)
+            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        // Tocador do Piano Virtual
+        function playPianoNote(frequency, color, label) {
+            playSynthSound(frequency, 'sine', 0.2, 0.6);
+            
+            // Adiciona efeitos dinâmicos visuais no corpo ao tocar o piano
+            createFloatingHeart(
+                window.innerWidth / 2 + (Math.random() * 200 - 100),
+                window.innerHeight - 100,
+                color
+            );
+        }
+
+        // Algoritmo de Lullaby/Caixinha de Música Gerada Proceduralmente
+        const cuteMelody = [
+            
+            523.25, 587.33, 659.25, 783.99, // C5, D5, E5, G5
+            880.00, 987.77, 1046.50, // A5, B5, C6
+            783.99, 659.25, 587.33, 523.25
+        ];
+        let melodyStep = 0;
+
+        function playMusicStep() {
+            if (!isMusicPlaying) return;
+            
+            // Toca uma nota suave da melodia
+            const freq = cuteMelody[melodyStep % cuteMelody.length];
+            playSynthSound(freq, 'sine', 0.05, 0.8);
+            
+            // Cria um coração flutuante suave na tela
+            createFloatingHeart(
+                Math.random() * window.innerWidth,
+                window.innerHeight - 50,
+                ['#fda4af', '#fecdd3', '#ffe4e6'][Math.floor(Math.random() * 3)]
+            );
+
+            melodyStep++;
+        }
+
+        function toggleMusic() {
+            initAudio();
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-text');
+            const btn = document.getElementById('btn-music');
+
+            if (isMusicPlaying) {
+                isMusicPlaying = false;
+                clearInterval(musicInterval);
+                icon.className = "fa-solid fa-music";
+                text.innerText = "Música de Caixinha";
+                btn.classList.remove('bg-pink-200');
+            } else {
+                isMusicPlaying = true;
+                // Inicializa se o navegador bloqueou áudio inicialmente
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                
+                // Toca a cada 600ms para criar um ritmo relaxante de música box
+                musicInterval = setInterval(playMusicStep, 600);
+                icon.className = "fa-solid fa-volume-high animate-pulse text-pink-600";
+                text.innerText = "Parar Caixinha 🌸";
+                btn.classList.add('bg-pink-200');
+                
+                // Toca a primeira nota imediatamente
+                playMusicStep();
+            }
+        }
+
+        // --- 3. CORAÇÕES FLUTUANTES (Efeito de Fundo Interativo) ---
+        function createFloatingHeart(x, y, color = '#ec4899') {
+            const container = document.getElementById('bg-hearts-container');
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            // Tamanho aleatório para variação orgânica
+            const size = Math.random() * 20 + 10;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            
+            // Ícone do FontAwesome ou SVG inline para excelente visual
+            heart.innerHTML = `<svg viewBox="0 0 32 32" fill="${color}"><path d="M16,28.22a2,2,0,0,1-1.42-.59L5,18.06A8,8,0,0,1,16.35,6.77L16,7.11l.35-.34A8,8,0,0,1,27,18.06l-9.58,9.57A2,2,0,0,1,16,28.22Z"/></svg>`;
+            
+            // Posição inicial
+            heart.style.left = `${x - size / 2}px`;
+            heart.style.top = `${y - size / 2}px`;
+            
+            // Duração aleatória do voo
+            const duration = Math.random() * 4 + 4;
+            heart.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(heart);
+            
+            // Deleta o elemento após a animação acabar
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Ao clicar em qualquer parte vazia da página, joga um coraçãozinho
+        document.body.addEventListener('click', (e) => {
+            // Ignora se clicou em um botão, canvas ou link para evitar bugs de usabilidade
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.tagName === 'I' || e.target.tagName === 'CANVAS') {
+                return;
+            }
+            createFloatingHeart(e.clientX, e.clientY, ['#ec4899', '#f43f5e', '#a855f7', '#fb7185'][Math.floor(Math.random() * 4)]);
+        });
+
+        // Corações voando suavemente de fundo o tempo todo
+        setInterval(() => {
+            if (Math.random() > 0.4) {
+                createFloatingHeart(
+                    Math.random() * window.innerWidth,
+                    window.innerHeight + 20,
+                    ['#fda4af', '#fecdd3', '#ffe4e6', '#fb7185'][Math.floor(Math.random() * 4)]
+                );
+            }
+        }, 1500);
+
+        // --- 4. CARTA SECRETA (Abrir/Fechar Envelope) ---
+        let isEnvelopeOpen = false;
+        function toggleEnvelope(event) {
+            const content = document.getElementById('letter-content');
+            const icon = document.getElementById('envelope-icon');
+            const btnText = document.getElementById('envelope-btn-text');
+
+            playSynthSound(600, 'triangle', 0.1, 0.3); // Som fofinho de abrir papel
+
+            if (isEnvelopeOpen) {
+                content.classList.add('hidden');
+                icon.className = "fa-solid fa-envelope text-pink-500 animate-bounce";
+                btnText.innerText = "Ler a Cartinha";
+                isEnvelopeOpen = false;
+            } else {
+                content.classList.remove('hidden');
+                icon.className = "fa-solid fa-envelope-open-text text-pink-400";
+                btnText.innerText = "Fechar Cartinha";
+                isEnvelopeOpen = true;
+                
+                // Efeito cascata de corações sobre a carta aberta
+                if (event && event.currentTarget) {
+                    const iconRect = icon.getBoundingClientRect();
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => {
+                            createFloatingHeart(
+                                iconRect.left + (iconRect.width/2),
+                                iconRect.top + window.scrollY,
+                                '#f43f5e'
+                            );
+                        }, i * 100);
+                    }
+                }
+            }
+        }
+
+        // --- 5. MINI-GAME "COLETOR DE AMOR" ---
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('game-container');
+        
+        let gameActive = false;
+        let score = 0;
+        let lives = 3;
+        let basket = { x: 0, y: 0, width: 45, height: 15 };
+        let hearts = [];
+        let gameLoopId = null;
+        let lastTime = 0;
+        
+        // Ajusta canvas ao tamanho da box
+        function resizeCanvas() {
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            basket.y = canvas.height - 20;
+            if(!gameActive) {
+                basket.x = canvas.width / 2 - basket.width / 2;
+                drawStartFrame();
+            }
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        // Configuração inicial do Canvas
+        setTimeout(resizeCanvas, 100);
+
+        // Escuta movimentos do mouse e toque no celular
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const rootX = e.clientX - rect.left;
+            basket.x = Math.max(0, Math.min(canvas.width - basket.width, rootX - basket.width / 2));
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                const rect = container.getBoundingClientRect();
+                const rootX = e.touches[0].clientX - rect.left;
+                basket.x = Math.max(0, Math.min(canvas.width - basket.width, rootX - basket.width / 2));
+                e.preventDefault(); // Impede o scroll de tela enquanto joga
+            }
+        }, { passive: false });
+
+        function drawStartFrame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Desenha cesta inicial
+            ctx.fillStyle = '#db2777';
+            ctx.beginPath();
+            ctx.roundRect(basket.x, basket.y, basket.width, basket.height, 5);
+            ctx.fill();
+        }
+
+        function startGame() {
+            document.getElementById('game-start-overlay').classList.add('hidden');
+            gameActive = true;
+            score = 0;
+            lives = 3;
+            hearts = [];
+            document.getElementById('game-score').innerText = `Pontos: ${score}`;
+            document.getElementById('game-lives').innerText = '❤️❤️❤️';
+            lastTime = performance.now();
+            playSynthSound(440, 'triangle', 0.15, 0.4);
+            
+            if(gameLoopId) cancelAnimationFrame(gameLoopId);
+            gameLoopId = requestAnimationFrame(updateGame);
+        }
+
+        function updateGame(timestamp) {
+            if (!gameActive) return;
+
+            const delta = timestamp - lastTime;
+            lastTime = timestamp;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Desenha Cesta (Arredondada e fofa)
+            ctx.fillStyle = '#db2777';
+            ctx.beginPath();
+            ctx.roundRect(basket.x, basket.y, basket.width, basket.height, [0, 0, 8, 8]);
+            ctx.fill();
+            // Borda superior da cesta
+            ctx.fillStyle = '#f43f5e';
+            ctx.fillRect(basket.x - 2, basket.y - 2, basket.width + 4, 4);
+
+            // Adiciona novos corações aleatoriamente
+            if (Math.random() < 0.03) {
+                hearts.push({
+                    x: Math.random() * (canvas.width - 20) + 10,
+                    y: -10,
+                    speed: Math.random() * 1.5 + 1.5,
+                    size: Math.random() * 8 + 8,
+                    color: ['#ec4899', '#f43f5e', '#a855f7', '#fb7185'][Math.floor(Math.random() * 4)]
+                });
+            }
+
+            // Atualiza e desenha corações
+            for (let i = hearts.length - 1; i >= 0; i--) {
+                const h = hearts[i];
+                h.y += h.speed;
+
+                // Desenha coração no Canvas
+                ctx.fillStyle = h.color;
+                ctx.beginPath();
+                const d = h.size;
+                // Desenho geométrico simplificado de coração para Canvas
+                ctx.arc(h.x - d/4, h.y, d/4, Math.PI, 0, false);
+                ctx.arc(h.x + d/4, h.y, d/4, Math.PI, 0, false);
+                ctx.lineTo(h.x, h.y + d/1.5);
+                ctx.closePath();
+                ctx.fill();
+
+                // Detecção de colisão com a cesta
+                if (h.y + d/1.5 >= basket.y && h.y <= basket.y + basket.height &&
+                    h.x >= basket.x && h.x <= basket.x + basket.width) {
+                    
+                    // Sucesso! Coletou amor!
+                    score += 10;
+                    document.getElementById('game-score').innerText = `Pontos: ${score}`;
+                    
+                    // Som fofinho de ganho
+                    playSynthSound(800 + score, 'sine', 0.08, 0.15);
+                    
+                    // Cria uma explosãozinha de coração voando do canvas
+                    const rect = container.getBoundingClientRect();
+                    createFloatingHeart(rect.left + h.x, rect.top + h.y, h.color);
+
+                    hearts.splice(i, 1);
+                    continue;
+                }
+
+                // Passou direto pela cesta (perde vida)
+                if (h.y > canvas.height) {
+                    lives--;
+                    updateLivesUI();
+                    playSynthSound(220, 'sawtooth', 0.1, 0.3); // Som triste de perda
+                    hearts.splice(i, 1);
+
+                    if (lives <= 0) {
+                        endGame();
+                        return;
+                    }
+                }
+            }
+
+            gameLoopId = requestAnimationFrame(updateGame);
+        }
+
+        function updateLivesUI() {
+            let livesStr = '';
+            for(let i=0; i<3; i++) {
+                livesStr += i < lives ? '❤️' : '🖤';
+            }
+            document.getElementById('game-lives').innerText = livesStr;
+        }
+
+        function endGame() {
+            gameActive = false;
+            cancelAnimationFrame(gameLoopId);
+            
+            const overlay = document.getElementById('game-start-overlay');
+            overlay.innerHTML = `
+                <p class="text-sm font-bold text-pink-700 mb-1">Fim de Jogo! 💖</p>
+                <p class="text-xs text-slate-600 mb-3">Você coletou <strong>${score}</strong> pontos de amor!</p>
+                <button onclick="startGame()" class="py-1.5 px-4 bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold rounded-lg shadow transition-all">Jogar Novamente</button>
+            `;
+            overlay.classList.remove('hidden');
+        }
+
+        
+            
+            try {
+                // Utiliza a API recomendada de compatibilidade
+                document.execCommand('copy');
+                const notification = document.getElementById('share-notification');
+                notification.classList.remove('hidden');
+                
+                playSynthSound(659.25, 'sine', 0.1, 0.3); // Som triunfante leve
+                
+                setTimeout(() => {
+                    notification.classList.add('hidden');
+                }, 4000);
+            } catch (err) {
+                console.error('Erro ao copiar link: ', err);
+            }
+            
+            document.body.removeChild(tempInput);
+        
+    </script>
+</body>
+</html>
