@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Um Presente Feito pela Lua Para Você!</title>
+    <title>Um presente da Srta.Thee Para Você! ❤️</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Quicksand para um visual arredondado e fofo, e Playfair Display para toques elegantes -->
@@ -54,6 +54,15 @@
         .transition-all-300 {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        /* Animação de tremor para erros */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .shake-animation {
+            animation: shake 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between text-slate-800 relative py-6 px-4">
@@ -65,11 +74,12 @@
     <header class="w-full max-w-4xl flex justify-between items-center z-10 px-4 mb-4">
         <div class="flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-pink-200/50 shadow-sm">
             <span class="text-pink-500 heartbeat-animation"><i class="fa-solid fa-heart"></i></span>
-            <span class="text-xs sm:text-sm font-semibold text-pink-700">Feito especialmente para você</div>
+            <span class="text-xs sm:text-sm font-semibold text-pink-700">Feito especialmente para você</span>
+        </div>
         <!-- Botão de Música Box Lofi Sintetizada -->
         <button id="btn-music" onclick="toggleMusic()" class="flex items-center gap-2 bg-white/80 hover:bg-pink-100 backdrop-blur-md px-4 py-2 rounded-full border border-pink-200 shadow-md transition-all duration-300 text-xs sm:text-sm font-semibold text-pink-600">
-            <i id="music-icon" class="fa-solid fa-music-alt"></i>
-            <span id="music-text">Caixinha de musica
+            <i id="music-icon" class="fa-solid fa-music"></i>
+            <span id="music-text">Caixinha de música</span>
         </button>
     </header>
 
@@ -103,7 +113,7 @@
                 
                 <!-- Área de exibição do bilhete -->
                 <div id="jar-message-box" class="w-full min-h-[90px] flex items-center justify-center bg-rose-50/50 rounded-2xl border border-dashed border-rose-200 p-4 mb-4 transition-all duration-300">
-                    <p id="jar-text" class="text-sm sm:text-base text-rose-800 italic font-semibold">"você é tão bonita, e isso é a coisa menos interesante sobre você "</p>
+                    <p id="jar-text" class="text-sm sm:text-base text-rose-800 italic font-semibold">"você é tão bonita, e isso é a coisa menos interessante sobre você"</p>
                 </div>
 
                 <button onclick="drawLoveMessage(event)" class="w-full py-3 px-6 bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
@@ -134,14 +144,70 @@
                     <button onclick="playPianoNote(493.88, '#ec4899', 'B')" class="w-10 sm:w-12 h-16 sm:h-20 bg-pink-400 hover:bg-pink-500 text-white font-bold rounded-xl shadow-md transition-all transform active:scale-90 flex flex-col justify-end pb-2 text-xs">B</button>
                 </div>
                 
-                <p class="text-xs text-rose-500/80 font-semibold animate-pulse">Dica: clique rápido nas notas para espalhar alegria!</p>
+                <p class="text-xs text-rose-500/80 font-semibold animate-pulse">Dica: clique rápido nas notas</p>
             </div>
 
-            <!-- CARD 3: Cartinha de Amor Interativa (Envelope que abre) -->
+            <!-- CARD 3: Calculadora de Sintonia -->
+            <div id="calculator-card" class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1 md:col-span-2 max-w-2xl mx-auto w-full">
+                <div class="w-full">
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-heart-circle-bolt heartbeat-animation"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Calculadora de Sintonia Cósmica</h2>
+                    <p class="text-sm text-slate-600 mb-6">
+                        Digite duas coisas para descobrir o grau exato de sintonia entre elas (ex: seus nomes, duas comidas, ou hobbies favoritos).
+                    </p>
+
+                    <!-- Inputs de Entrada -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="text-left">
+                            <label class="block text-xs font-bold text-pink-600 mb-1 ml-1">Primeiro elemento:</label>
+                            <input type="text" id="calc-input-1" placeholder="Ex: Rafaella" class="w-full px-4 py-2.5 rounded-2xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white/70 text-sm font-semibold text-slate-700 placeholder-pink-300/80 transition-all">
+                        </div>
+                        <div class="text-left">
+                            <label class="block text-xs font-bold text-pink-600 mb-1 ml-1">Segundo elemento:</label>
+                            <input type="text" id="calc-input-2" placeholder="Ex: Luana" class="w-full px-4 py-2.5 rounded-2xl border border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white/70 text-sm font-semibold text-slate-700 placeholder-pink-300/80 transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Mensagem de Aviso Interna -->
+                    <div id="calc-warning" class="hidden text-rose-600 text-xs font-semibold mb-4 animate-bounce">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> Por favor, preencha os dois campos para calcular!
+                    </div>
+
+                    <!-- Tela de Carregamento Fofa -->
+                    <div id="calc-loading" class="hidden w-full py-4 flex flex-col items-center justify-center">
+                        <div class="w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin mb-3"></div>
+                        <p id="calc-loading-text" class="text-xs font-bold text-pink-700 animate-pulse">Analisando conexão...</p>
+                        <div class="w-48 bg-pink-100 h-2.5 rounded-full overflow-hidden mt-3 border border-pink-200">
+                            <div id="calc-progress-bar" class="bg-gradient-to-r from-pink-400 to-rose-500 h-full w-0 transition-all duration-300 ease-out"></div>
+                        </div>
+                    </div>
+
+                    <!-- Área do Resultado -->
+                    <div id="calc-result" class="hidden w-full bg-pink-50/50 rounded-2xl border border-pink-200/60 p-5 mb-5 transition-all duration-500">
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="text-xs font-bold text-pink-500 uppercase tracking-widest">Sintonia Calculada</span>
+                        </div>
+                        <div id="calc-number" class="text-4xl sm:text-5xl font-extrabold text-pink-600 mb-3 drop-shadow-sm serif-font italic animate-pulse">
+                            100%
+                        </div>
+                        <p id="calc-explanation" class="text-sm text-slate-700 font-medium leading-relaxed italic px-2">
+                            A explicação perfeita aparecerá aqui!
+                        </p>
+                    </div>
+                </div>
+
+                <button onclick="calculateSintonia(event)" id="btn-calculate" class="w-full py-3.5 px-6 bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-heart-pulse"></i> Calcular Sintonia Cósmica
+                </button>
+            </div>
+
+            <!-- CARD 4: Cartinha de Amor Interativa (Envelope que abre) -->
             <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
                 <div>
                     <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
-                        <i id="envelope-icon" class="fa-solid fa-envelope-open-text"></i>
+                        <i id="envelope-icon" class="fa-solid fa-envelope"></i>
                     </div>
                     <h2 class="text-xl font-bold text-pink-700 mb-2">Carta Secreta para Você</h2>
                     <p class="text-sm text-slate-600 mb-4">
@@ -158,8 +224,8 @@
                     <div id="letter-content" class="hidden max-h-[180px] overflow-y-auto bg-amber-50 border border-amber-200 p-4 rounded-xl text-left text-sm text-amber-900 shadow-inner scrollbar-thin scrollbar-thumb-pink-200">
                         <p class="font-bold mb-1 serif-font text-base text-rose-700">Querida Rafa, 🌸</p>
                         <p class="leading-relaxed mb-2">
-                            Quero te lembrar que você é uma pessoa brilhante e maravilhosa. Às vezes o mundo corre muito rápido, mas não se esqueça de respirar fundo, sorrir e se orgulhar de quem você é. nunca se esqueça que você não é apenas bonita, você fala bonita, você pensa bonita, existe da maneira mais bonita possivel.   
-                        </p
+                            Quero te lembrar que você é uma pessoa brilhante e maravilhosa. Às vezes o mundo corre muito rápido, mas não se esqueça de respirar fundo, sorrir e se orgulhar de quem você é. Nunca se esqueça que você não é apenas bonita, você fala bonita, você pensa bonita, existe da maneira mais bonita possível.   
+                        </p>
                         <p class="leading-relaxed mb-2">
                             Seu coração é imenso e sua presença torna as coisas ao seu redor muito mais leves e bonitas. Que sua vida seja tão doce e agradável quanto você!
                         </p>
@@ -168,7 +234,7 @@
                 </div>
             </div>
 
-            <!-- CARD 4: Joguinho Rápido "Chuva de Carinho" -->
+            <!-- CARD 5: Joguinho Rápido "Chuva de Carinho" -->
             <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
                 <div>
                     <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
@@ -198,14 +264,73 @@
                 </div>
             </div>
 
+            <!-- CARD 6: JOGO "DINO DO DENGO" -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-dragon heartbeat-animation"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Jogo: Dino </h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Ajude o Dino Cor-de-rosa a pular os obstáculos e cactos!
+                    </p>
+                </div>
+
+                <!-- Área do Jogo Dino -->
+                <div class="relative w-full h-[150px] bg-amber-50/40 border border-amber-100 rounded-2xl overflow-hidden cursor-pointer shadow-inner" id="dino-container">
+                    <!-- Instruções sobrepostas -->
+                    <div id="dino-start-overlay" class="absolute inset-0 flex flex-col items-center justify-center bg-white/90 z-20 transition-all duration-300">
+                        <p class="text-xs sm:text-sm font-semibold text-pink-700 mb-1">Ajude o dino a saltar! 🦖💞</p>
+                        <p class="text-[10px] text-slate-500 mb-3">Toque na tela ou use a barra de ESPAÇO</p>
+                        <button onclick="startDino()" class="py-1.5 px-4 bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold rounded-lg shadow transition-all">Começar Corrida</button>
+                    </div>
+                    
+                    <canvas id="dino-canvas" class="w-full h-full block"></canvas>
+                    
+                    <!-- Placar de Metros -->
+                    <div class="absolute top-2 left-2 flex items-center text-xs font-bold text-pink-700 pointer-events-none z-10 bg-white/60 backdrop-blur-sm px-2.5 py-1 rounded">
+                        <span id="dino-score">Distância: 0m</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARD 7: FORMULÁRIO ESPECIAL (NOVO RECURSO!) -->
+            <div class="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-pink-100 shadow-xl flex flex-col justify-between items-center text-center transition-all-300 hover:transform hover:-translate-y-1">
+                <div>
+                    <div class="w-16 h-16 bg-pink-100 text-pink-500 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 shadow-inner">
+                        <i class="fa-solid fa-clipboard-question heartbeat-animation"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-pink-700 mb-2">Conhecendo Você Melhor!</h2>
+                    <p class="text-sm text-slate-600 mb-4">
+                        Preparei perguntas fofas e engraçadas em um quiz feito unicamente para você responder!
+                    </p>
+                </div>
+
+                <!-- Painel de Destaque Decorado -->
+                <div class="w-full bg-rose-50/50 rounded-2xl border border-dashed border-rose-200 p-4 mb-4 flex flex-col items-center justify-center gap-2">
+                    <p class="text-xs text-rose-700 font-semibold italic">"Formulario feito todinho para ti"</p>
+                    <div class="flex gap-2.5 text-rose-400 text-xs">
+                        <span><i class="fa-solid fa-pen-fancy"></i> Personalizado</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-star"></i> Super Divertido</span>
+                    </div>
+                </div>
+
+                <!-- Botão do Formulário -->
+                <!-- SUBSTITUA O LINK ABAIXO: Troque o 'https://forms.google.com' pelo seu link real do formulário! -->
+                <a href="https://hfxeflzv.forms.app/formulario-para-rafa" target="_blank" onclick="handleFormClick(event)" class="w-full py-3.5 px-6 bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-bold rounded-2xl shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-signature"></i> Responder Meu Quiz 📝✨
+                </a>
+            </div>
+
         </div>
 
-        <!-- BOTÃO DO SPOTIFY (Inserido acima do rodapé) -->
+        <!-- BOTÃO DO SPOTIFY -->
         <div class="w-full max-w-md px-4 mt-4 flex flex-col items-center">
             <a href="https://open.spotify.com/playlist/0TNdeYoqDVbHuMZDKt6nrr?si=c3gi5M9FSUq3doNQBKUfcw" target="_blank" class="w-full py-3.5 px-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-3 border border-emerald-400/30">
                 <i class="fa-brands fa-spotify text-2xl"></i>
                 <div class="text-left leading-tight">
-                    <p class="text-xs uppercase font-extrabold tracking-wider opacity-90">Playlist feita com carinho para ti </p>
+                    <p class="text-xs uppercase font-extrabold tracking-wider opacity-90">Playlist feita com carinho para ti</p>
                     <p class="text-sm">Ouvir Playlist Especial no Spotify 🎵</p>
                 </div>
             </a>
@@ -225,13 +350,11 @@
     <script>
         // --- 1. CONFIGURAÇÕES E BANCO DE DADOS DE COMPLEMENTOS ---
         const loveMessages = [
-
             "d^b=[,7' .",
-            "Eu não consigo escolher quando e por quem tenho bons sentimentos. Mas tenho alguns bons sentimentos por voce!. ",
+            "Eu não consigo escolher quando e por quem tenho bons sentimentos. Mas tenho alguns bons sentimentos por você!.",
             "Se a vida fosse flores eu sempre regaria elas para manter lindas e bonitas, igual meu amor por você! ✨",
             "Seja gentil consigo mesmo hoje. Você está fazendo o seu melhor! 🌱",
             "Você merece todo o amor, risos e momentos mágicos que o universo pode dar! 🌟",
-            "Eu não consigo escolher quando e por quem tenho bons sentimentos. Mas tenho alguns bons sentimentos por voce.",
             "Você é uma combinação perfeita de talento, doçura e força! 🦄",
             "Sua existência torna as vidas das pessoas ao seu redor muito mais leves e felizes. 💕",
             "Seus pensamentos e ideias são brilhantes. Nunca pare de sonhar acordado! 💭",
@@ -244,7 +367,6 @@
 
         function drawLoveMessage(event) {
             let randomIndex;
-            // Garante que não repete a mensagem anterior imediatamente
             do {
                 randomIndex = Math.floor(Math.random() * loveMessages.length);
             } while (randomIndex === lastMessageIndex);
@@ -254,18 +376,16 @@
             const textBox = document.getElementById('jar-message-box');
             const textEl = document.getElementById('jar-text');
             
-            // Efeito visual de troca de mensagem
             textBox.style.opacity = '0';
             textBox.style.transform = 'scale(0.95)';
             
-            playSynthSound(523.25, 'sine', 0.1, 0.2); // Som fofo ao retirar papel do pote
+            playSynthSound(523.25, 'sine', 0.1, 0.2);
 
             setTimeout(() => {
                 textEl.innerText = `"${loveMessages[randomIndex]}"`;
                 textBox.style.opacity = '1';
                 textBox.style.transform = 'scale(1)';
                 
-                // Dispara alguns coraçõezinhos a partir do botão clicado
                 if (event && event.currentTarget) {
                     const btnRect = event.currentTarget.getBoundingClientRect();
                     for (let i = 0; i < 5; i++) {
@@ -279,7 +399,7 @@
             }, 200);
         }
 
-        // --- 2. SISTEMA DE AUDIO (Web Audio API - Sem dependências externas!) ---
+        // --- 2. SISTEMA DE AUDIO (Web Audio API) ---
         let audioCtx = null;
         let isMusicPlaying = false;
         let musicInterval = null;
@@ -290,7 +410,6 @@
             }
         }
 
-        // Função genérica de sintetizador para efeitos sonoros
         function playSynthSound(frequency, type = 'sine', volume = 0.1, duration = 0.3) {
             initAudio();
             if (audioCtx.state === 'suspended') {
@@ -304,7 +423,6 @@
             osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 
             gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
-            // Decay suave (redução de volume)
             gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
 
             osc.connect(gainNode);
@@ -314,11 +432,8 @@
             osc.stop(audioCtx.currentTime + duration);
         }
 
-        // Tocador do Piano Virtual
         function playPianoNote(frequency, color, label) {
             playSynthSound(frequency, 'sine', 0.2, 0.6);
-            
-            // Adiciona efeitos dinâmicos visuais no corpo ao tocar o piano
             createFloatingHeart(
                 window.innerWidth / 2 + (Math.random() * 200 - 100),
                 window.innerHeight - 100,
@@ -326,11 +441,9 @@
             );
         }
 
-        // Algoritmo de Lullaby/Caixinha de Música Gerada Proceduralmente
         const cuteMelody = [
-            
-            523.25, 587.33, 659.25, 783.99, // C5, D5, E5, G5
-            880.00, 987.77, 1046.50, // A5, B5, C6
+            523.25, 587.33, 659.25, 783.99,
+            880.00, 987.77, 1046.50,
             783.99, 659.25, 587.33, 523.25
         ];
         let melodyStep = 0;
@@ -338,11 +451,9 @@
         function playMusicStep() {
             if (!isMusicPlaying) return;
             
-            // Toca uma nota suave da melodia
             const freq = cuteMelody[melodyStep % cuteMelody.length];
             playSynthSound(freq, 'sine', 0.05, 0.8);
             
-            // Cria um coração flutuante suave na tela
             createFloatingHeart(
                 Math.random() * window.innerWidth,
                 window.innerHeight - 50,
@@ -362,88 +473,84 @@
                 isMusicPlaying = false;
                 clearInterval(musicInterval);
                 icon.className = "fa-solid fa-music";
-                text.innerText = "Música de Caixinha";
+                text.innerText = "Caixinha de música";
                 btn.classList.remove('bg-pink-200');
             } else {
                 isMusicPlaying = true;
-                // Inicializa se o navegador bloqueou áudio inicialmente
                 if (audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
                 
-                // Toca a cada 600ms para criar um ritmo relaxante de música box
                 musicInterval = setInterval(playMusicStep, 600);
                 icon.className = "fa-solid fa-volume-high animate-pulse text-pink-600";
                 text.innerText = "Parar Caixinha 🌸";
                 btn.classList.add('bg-pink-200');
                 
-                // Toca a primeira nota imediatamente
                 playMusicStep();
             }
         }
 
-        // --- 3. CORAÇÕES FLUTUANTES (Efeito de Fundo Interativo) ---
+        // --- 3. CORAÇÕES FLUTUANTES ---
         function createFloatingHeart(x, y, color = '#ec4899') {
             const container = document.getElementById('bg-hearts-container');
             const heart = document.createElement('div');
             heart.classList.add('floating-heart');
             
-            // Tamanho aleatório para variação orgânica
             const size = Math.random() * 20 + 10;
             heart.style.width = `${size}px`;
             heart.style.height = `${size}px`;
             
-            // Ícone do FontAwesome ou SVG inline para excelente visual
             heart.innerHTML = `<svg viewBox="0 0 32 32" fill="${color}"><path d="M16,28.22a2,2,0,0,1-1.42-.59L5,18.06A8,8,0,0,1,16.35,6.77L16,7.11l.35-.34A8,8,0,0,1,27,18.06l-9.58,9.57A2,2,0,0,1,16,28.22Z"/></svg>`;
             
-            // Posição inicial
             heart.style.left = `${x - size / 2}px`;
             heart.style.top = `${y - size / 2}px`;
             
-            // Duração aleatória do voo
             const duration = Math.random() * 4 + 4;
             heart.style.animationDuration = `${duration}s`;
             
             container.appendChild(heart);
             
-            // Deleta o elemento após a animação acabar
             setTimeout(() => {
                 heart.remove();
             }, duration * 1000);
         }
 
-        // Ao clicar em qualquer parte vazia da página, joga um coraçãozinho
         document.body.addEventListener('click', (e) => {
-            // Ignora se clicou em um botão, canvas ou link para evitar bugs de usabilidade
-            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.tagName === 'I' || e.target.tagName === 'CANVAS') {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.tagName === 'I' || e.target.tagName === 'CANVAS' || e.target.tagName === 'INPUT') {
                 return;
             }
             createFloatingHeart(e.clientX, e.clientY, ['#ec4899', '#f43f5e', '#a855f7', '#fb7185'][Math.floor(Math.random() * 4)]);
         });
 
-        // Corações voando suavemente de fundo o tempo todo
-        setInterval(() => {
-            if (Math.random() > 0.4) {
-                createFloatingHeart(
-                    Math.random() * window.innerWidth,
-                    window.innerHeight + 20,
-                    ['#fda4af', '#fecdd3', '#ffe4e6', '#fb7185'][Math.floor(Math.random() * 4)]
-                );
-            }
-        }, 1500);
+        let heartIntervalTime = 1500;
+        let heartSpawner = null;
 
-        // --- 4. CARTA SECRETA (Abrir/Fechar Envelope) ---
+        function startGlobalHeartSpawner() {
+            if (heartSpawner) clearInterval(heartSpawner);
+            heartSpawner = setInterval(() => {
+                if (Math.random() > 0.4) {
+                    createFloatingHeart(
+                        Math.random() * window.innerWidth,
+                        window.innerHeight + 20,
+                        ['#fda4af', '#fecdd3', '#ffe4e6', '#fb7185'][Math.floor(Math.random() * 4)]
+                    );
+                }
+            }, heartIntervalTime);
+        }
+        startGlobalHeartSpawner();
+
+        // --- 4. CARTA SECRETA ---
         let isEnvelopeOpen = false;
         function toggleEnvelope(event) {
             const content = document.getElementById('letter-content');
             const icon = document.getElementById('envelope-icon');
             const btnText = document.getElementById('envelope-btn-text');
 
-            playSynthSound(600, 'triangle', 0.1, 0.3); // Som fofinho de abrir papel
+            playSynthSound(600, 'triangle', 0.1, 0.3);
 
             if (isEnvelopeOpen) {
                 content.classList.add('hidden');
-                icon.className = "fa-solid fa-envelope text-pink-500 animate-bounce";
+                icon.className = "fa-solid fa-envelope text-pink-500";
                 btnText.innerText = "Ler a Cartinha";
                 isEnvelopeOpen = false;
             } else {
@@ -452,7 +559,6 @@
                 btnText.innerText = "Fechar Cartinha";
                 isEnvelopeOpen = true;
                 
-                // Efeito cascata de corações sobre a carta aberta
                 if (event && event.currentTarget) {
                     const iconRect = icon.getBoundingClientRect();
                     for (let i = 0; i < 8; i++) {
@@ -468,7 +574,104 @@
             }
         }
 
-        // --- 5. MINI-GAME "COLETOR DE AMOR" ---
+        // --- 5. CALCULADORA DE SINTONIA CÓSMICA ---
+        const calcExplanations = [
+            "Não restam dúvidas! O universo fez as contas e confirmou que <strong>{val1}</strong> e <strong>{val2}</strong> combinam tanto que se tornaram a definição oficial de 'perfeição cósmica' no dicionário do amor. ✨💖",
+            "Análises quânticas indicam que a energia de <strong>{val1}</strong> e <strong>{val2}</strong> cria uma fusão atômica insuperável. É mais gostoso que brigadeiro de panela no domingo de chuva! 🍫🌸",
+            "Algoritmos astrológicos rodaram em supercomputadores e travou tudo! A sintonia entre <strong>{val1}</strong> e <strong>{val2}</strong> quebrou as barreiras da matemática comum. É simplesmente fora de série! 🌌🚀",
+            "Atenção: A ciência declarou que é biologicamente impossível que <strong>{val1}</strong> e <strong>{val2}</strong> fiquem longe um do outro. Uma combinação mais perfeita que cobertor quentinho com filme de comédia! 🍿🛋️",
+            "A receita perfeita do destino! Se você juntar <strong>{val1}</strong> e <strong>{val2}</strong>, o resultado é pura magia, risadas bobas e muito dengo garantido para toda a vida! 🧁🍨"
+        ];
+
+        function calculateSintonia(event) {
+            const val1 = document.getElementById('calc-input-1').value.trim();
+            const val2 = document.getElementById('calc-input-2').value.trim();
+            const warning = document.getElementById('calc-warning');
+            const loading = document.getElementById('calc-loading');
+            const resultBox = document.getElementById('calc-result');
+            const btn = document.getElementById('btn-calculate');
+            const card = document.getElementById('calculator-card');
+
+            if (!val1 || !val2) {
+                warning.classList.remove('hidden');
+                card.classList.add('shake-animation');
+                playSynthSound(150, 'sawtooth', 0.15, 0.3);
+                setTimeout(() => {
+                    card.classList.remove('shake-animation');
+                }, 400);
+                return;
+            }
+
+            warning.classList.add('hidden');
+            resultBox.classList.add('hidden');
+            loading.classList.remove('hidden');
+            btn.setAttribute('disabled', 'true');
+            btn.classList.add('opacity-50', 'pointer-events-none');
+
+            let step = 0;
+            const phrases = [
+                "Iniciando decodificador de romance...",
+                "Consultando astros e cupidos...",
+                "Analisando o nível de fofura...",
+                "Multiplicando os abraços...",
+                "Consolidando conexão absoluta!"
+            ];
+            
+            const loadText = document.getElementById('calc-loading-text');
+            const progBar = document.getElementById('calc-progress-bar');
+            
+            const loadingInterval = setInterval(() => {
+                if (step < phrases.length) {
+                    loadText.innerText = phrases[step];
+                    progBar.style.width = `${(step + 1) * 20}%`;
+                    playSynthSound(300 + (step * 80), 'sine', 0.08, 0.2);
+                    step++;
+                } else {
+                    clearInterval(loadingInterval);
+                    revealSintoniaResult(val1, val2);
+                }
+            }, 500);
+        }
+
+        function revealSintoniaResult(val1, val2) {
+            const loading = document.getElementById('calc-loading');
+            const resultBox = document.getElementById('calc-result');
+            const calcNum = document.getElementById('calc-number');
+            const calcExp = document.getElementById('calc-explanation');
+            const btn = document.getElementById('btn-calculate');
+
+            loading.classList.add('hidden');
+            
+            const mode = Math.random() > 0.5 ? "100%" : "∞% (Infinito!)";
+            calcNum.innerHTML = `<i class="fa-solid fa-sparkles text-yellow-400 text-lg mr-2 animate-pulse"></i> ${mode} <i class="fa-solid fa-sparkles text-yellow-400 text-lg ml-2 animate-pulse"></i>`;
+            
+            const randomPhrase = calcExplanations[Math.floor(Math.random() * calcExplanations.length)];
+            const formattedPhrase = randomPhrase.replace(/{val1}/g, val1).replace(/{val2}/g, val2);
+            calcExp.innerHTML = formattedPhrase;
+
+            resultBox.classList.remove('hidden');
+            
+            playSynthSound(523.25, 'sine', 0.15, 0.2);
+            setTimeout(() => playSynthSound(659.25, 'sine', 0.15, 0.2), 150);
+            setTimeout(() => playSynthSound(783.99, 'sine', 0.15, 0.2), 300);
+            setTimeout(() => playSynthSound(1046.50, 'sine', 0.2, 0.5), 450);
+
+            const cardRect = document.getElementById('calculator-card').getBoundingClientRect();
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFloatingHeart(
+                        cardRect.left + (cardRect.width / 2) + (Math.random() * 250 - 125),
+                        cardRect.top + (cardRect.height / 2) + window.scrollY + (Math.random() * 80 - 40),
+                        ['#ec4899', '#f43f5e', '#f472b6', '#a855f7', '#ffb0b0'][Math.floor(Math.random() * 5)]
+                    );
+                }, i * 50);
+            }
+
+            btn.removeAttribute('disabled');
+            btn.classList.remove('opacity-50', 'pointer-events-none');
+        }
+
+        // --- 6. MINI-GAME "COLETOR DE AMOR" ---
         const canvas = document.getElementById('game-canvas');
         const ctx = canvas.getContext('2d');
         const container = document.getElementById('game-container');
@@ -481,7 +684,6 @@
         let gameLoopId = null;
         let lastTime = 0;
         
-        // Ajusta canvas ao tamanho da box
         function resizeCanvas() {
             canvas.width = container.clientWidth;
             canvas.height = container.clientHeight;
@@ -493,10 +695,8 @@
         }
         
         window.addEventListener('resize', resizeCanvas);
-        // Configuração inicial do Canvas
         setTimeout(resizeCanvas, 100);
 
-        // Escuta movimentos do mouse e toque no celular
         container.addEventListener('mousemove', (e) => {
             const rect = container.getBoundingClientRect();
             const rootX = e.clientX - rect.left;
@@ -508,13 +708,12 @@
                 const rect = container.getBoundingClientRect();
                 const rootX = e.touches[0].clientX - rect.left;
                 basket.x = Math.max(0, Math.min(canvas.width - basket.width, rootX - basket.width / 2));
-                e.preventDefault(); // Impede o scroll de tela enquanto joga
+                e.preventDefault();
             }
         }, { passive: false });
 
         function drawStartFrame() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // Desenha cesta inicial
             ctx.fillStyle = '#db2777';
             ctx.beginPath();
             ctx.roundRect(basket.x, basket.y, basket.width, basket.height, 5);
@@ -544,16 +743,14 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Desenha Cesta (Arredondada e fofa)
             ctx.fillStyle = '#db2777';
             ctx.beginPath();
             ctx.roundRect(basket.x, basket.y, basket.width, basket.height, [0, 0, 8, 8]);
             ctx.fill();
-            // Borda superior da cesta
+            
             ctx.fillStyle = '#f43f5e';
             ctx.fillRect(basket.x - 2, basket.y - 2, basket.width + 4, 4);
 
-            // Adiciona novos corações aleatoriamente
             if (Math.random() < 0.03) {
                 hearts.push({
                     x: Math.random() * (canvas.width - 20) + 10,
@@ -564,34 +761,27 @@
                 });
             }
 
-            // Atualiza e desenha corações
             for (let i = hearts.length - 1; i >= 0; i--) {
                 const h = hearts[i];
                 h.y += h.speed;
 
-                // Desenha coração no Canvas
                 ctx.fillStyle = h.color;
                 ctx.beginPath();
                 const d = h.size;
-                // Desenho geométrico simplificado de coração para Canvas
                 ctx.arc(h.x - d/4, h.y, d/4, Math.PI, 0, false);
                 ctx.arc(h.x + d/4, h.y, d/4, Math.PI, 0, false);
                 ctx.lineTo(h.x, h.y + d/1.5);
                 ctx.closePath();
                 ctx.fill();
 
-                // Detecção de colisão com a cesta
                 if (h.y + d/1.5 >= basket.y && h.y <= basket.y + basket.height &&
                     h.x >= basket.x && h.x <= basket.x + basket.width) {
                     
-                    // Sucesso! Coletou amor!
                     score += 10;
                     document.getElementById('game-score').innerText = `Pontos: ${score}`;
                     
-                    // Som fofinho de ganho
                     playSynthSound(800 + score, 'sine', 0.08, 0.15);
                     
-                    // Cria uma explosãozinha de coração voando do canvas
                     const rect = container.getBoundingClientRect();
                     createFloatingHeart(rect.left + h.x, rect.top + h.y, h.color);
 
@@ -599,11 +789,10 @@
                     continue;
                 }
 
-                // Passou direto pela cesta (perde vida)
                 if (h.y > canvas.height) {
                     lives--;
                     updateLivesUI();
-                    playSynthSound(220, 'sawtooth', 0.1, 0.3); // Som triste de perda
+                    playSynthSound(220, 'sawtooth', 0.1, 0.3);
                     hearts.splice(i, 1);
 
                     if (lives <= 0) {
@@ -637,25 +826,303 @@
             overlay.classList.remove('hidden');
         }
 
-        
-            
-            try {
-                // Utiliza a API recomendada de compatibilidade
-                document.execCommand('copy');
-                const notification = document.getElementById('share-notification');
-                notification.classList.remove('hidden');
-                
-                playSynthSound(659.25, 'sine', 0.1, 0.3); // Som triunfante leve
-                
-                setTimeout(() => {
-                    notification.classList.add('hidden');
-                }, 4000);
-            } catch (err) {
-                console.error('Erro ao copiar link: ', err);
+        // --- 7. JOGO "DINO DO DENGO" (DINO DO GOOGLE CHROME FOFO) ---
+        const dCanvas = document.getElementById('dino-canvas');
+        const dCtx = dCanvas.getContext('2d');
+        const dContainer = document.getElementById('dino-container');
+
+        let dinoActive = false;
+        let dinoScore = 0;
+        let dino = { x: 30, y: 0, width: 20, height: 26, velocity: 0, gravity: 0.28, jumpForce: -5.4, isGrounded: true };
+        let dinoObstacles = [];
+        let dinoLoopId = null;
+        let lastDinoTime = 0;
+        let dinoSpawnTimer = 0;
+        const groundHeight = 22;
+
+        function resizeDinoCanvas() {
+            dCanvas.width = dContainer.clientWidth;
+            dCanvas.height = dContainer.clientHeight;
+            if(!dinoActive) {
+                drawDinoStartFrame();
             }
+        }
+
+        window.addEventListener('resize', resizeDinoCanvas);
+        setTimeout(resizeDinoCanvas, 150);
+
+        dContainer.addEventListener('mousedown', (e) => {
+            if(dinoActive) {
+                triggerDinoJump();
+                e.stopPropagation();
+            }
+        });
+
+        dContainer.addEventListener('touchstart', (e) => {
+            if(dinoActive) {
+                triggerDinoJump();
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { passive: false });
+
+        window.addEventListener('keydown', (e) => {
+            if (dinoActive && (e.code === 'Space' || e.code === 'ArrowUp')) {
+                e.preventDefault();
+                triggerDinoJump();
+            }
+        });
+
+        function triggerDinoJump() {
+            if (dino.isGrounded) {
+                dino.velocity = dino.jumpForce;
+                dino.isGrounded = false;
+                playSynthSound(493.88, 'sine', 0.1, 0.15);
+            }
+        }
+
+        function drawDinoStartFrame() {
+            dCtx.clearRect(0, 0, dCanvas.width, dCanvas.height);
+            dCtx.strokeStyle = '#fca5a5';
+            dCtx.lineWidth = 3;
+            dCtx.beginPath();
+            dCtx.moveTo(0, dCanvas.height - groundHeight);
+            dCtx.lineTo(dCanvas.width, dCanvas.height - groundHeight);
+            dCtx.stroke();
+
+            const groundY = dCanvas.height - groundHeight;
+            drawCuteDino(dino.x, groundY - dino.height);
+        }
+
+        function drawCuteDino(px, py) {
+            dCtx.save();
+            dCtx.translate(px, py);
+
+            dCtx.fillStyle = '#f472b6';
+            dCtx.beginPath();
+            dCtx.roundRect(0, 0, dino.width, dino.height - 4, [6, 6, 2, 2]);
+            dCtx.fill();
+
+            dCtx.beginPath();
+            dCtx.moveTo(0, dino.height - 8);
+            dCtx.quadraticCurveTo(-6, dino.height - 12, -8, dino.height - 16);
+            dCtx.quadraticCurveTo(-4, dino.height - 4, 2, dino.height - 4);
+            dCtx.closePath();
+            dCtx.fill();
+
+            dCtx.fillStyle = '#334155';
+            dCtx.beginPath();
+            dCtx.arc(14, 6, 2, 0, Math.PI * 2);
+            dCtx.fill();
             
-            document.body.removeChild(tempInput);
-        
+            dCtx.fillStyle = '#ffffff';
+            dCtx.beginPath();
+            dCtx.arc(14.5, 5.5, 0.6, 0, Math.PI * 2);
+            dCtx.fill();
+
+            dCtx.fillStyle = '#fecdd3';
+            dCtx.beginPath();
+            dCtx.arc(13, 10, 2, 0, Math.PI * 2);
+            dCtx.fill();
+
+            dCtx.fillStyle = '#c084fc';
+            dCtx.beginPath();
+            dCtx.moveTo(2, 0); dCtx.lineTo(5, -3); dCtx.lineTo(8, 0);
+            dCtx.moveTo(7, 4); dCtx.lineTo(10, 1); dCtx.lineTo(13, 4);
+            dCtx.fill();
+
+            const isJumping = py < (dCanvas.height - groundHeight - dino.height);
+            const legOffset = (!isJumping && Math.floor(performance.now() / 120) % 2 === 0) ? 3 : 0;
+            
+            dCtx.fillStyle = '#db2777';
+            dCtx.fillRect(4, dino.height - 4, 4, 4);
+            
+            dCtx.fillStyle = '#be185d';
+            dCtx.fillRect(12, dino.height - 4 + (legOffset ? -1 : 1), 4, 4);
+
+            dCtx.fillStyle = '#ffffff';
+            dCtx.font = '7px serif';
+            dCtx.fillText('❤️', 4, 12);
+
+            dCtx.restore();
+        }
+
+        function startDino() {
+            document.getElementById('dino-start-overlay').classList.add('hidden');
+            dinoActive = true;
+            dinoScore = 0;
+            dino.y = dCanvas.height - groundHeight - dino.height;
+            dino.velocity = 0;
+            dino.isGrounded = true;
+            dinoObstacles = [];
+            dinoSpawnTimer = 0;
+            document.getElementById('dino-score').innerText = `Distância: ${dinoScore}m`;
+
+            playSynthSound(349.23, 'sine', 0.1, 0.2);
+            setTimeout(() => playSynthSound(440.00, 'sine', 0.1, 0.2), 120);
+
+            lastDinoTime = performance.now();
+            if(dinoLoopId) cancelAnimationFrame(dinoLoopId);
+            dinoLoopId = requestAnimationFrame(updateDino);
+        }
+
+        function updateDino(timestamp) {
+            if (!dinoActive) return;
+
+            const delta = timestamp - lastDinoTime;
+            lastDinoTime = timestamp;
+
+            dCtx.clearRect(0, 0, dCanvas.width, dCanvas.height);
+
+            const groundY = dCanvas.height - groundHeight;
+            dCtx.strokeStyle = '#fca5a5';
+            dCtx.lineWidth = 3;
+            dCtx.beginPath();
+            dCtx.moveTo(0, groundY);
+            dCtx.lineTo(dCanvas.width, groundY);
+            dCtx.stroke();
+
+            dCtx.fillStyle = 'rgba(254, 205, 211, 0.3)';
+            dCtx.beginPath();
+            dCtx.arc(180, 30, 10, 0, Math.PI * 2);
+            dCtx.arc(195, 30, 15, 0, Math.PI * 2);
+            dCtx.arc(210, 30, 10, 0, Math.PI * 2);
+            dCtx.fill();
+
+            dino.velocity += dino.gravity;
+            dino.y += dino.velocity;
+
+            if (dino.y >= groundY - dino.height) {
+                dino.y = groundY - dino.height;
+                dino.velocity = 0;
+                dino.isGrounded = true;
+            }
+
+            dinoScore++;
+            document.getElementById('dino-score').innerText = `Distância: ${dinoScore}m`;
+
+            dinoSpawnTimer += 1.2;
+            if (dinoSpawnTimer >= 100) {
+                dinoSpawnTimer = 0;
+                const obstType = Math.random() > 0.45 ? 0 : 1;
+                dinoObstacles.push({
+                    x: dCanvas.width,
+                    y: groundY - (obstType === 0 ? 20 : 18),
+                    width: obstType === 0 ? 12 : 14,
+                    height: obstType === 0 ? 20 : 18,
+                    type: obstType
+                });
+            }
+
+            for (let i = dinoObstacles.length - 1; i >= 0; i--) {
+                const obs = dinoObstacles[i];
+                obs.x -= 2.2;
+
+                if (obs.x + obs.width < 0) {
+                    dinoObstacles.splice(i, 1);
+                    continue;
+                }
+
+                if (obs.type === 0) {
+                    dCtx.fillStyle = '#34d399';
+                    dCtx.beginPath();
+                    dCtx.roundRect(obs.x, obs.y, obs.width, obs.height, [4, 4, 0, 0]);
+                    dCtx.fill();
+                    
+                    dCtx.fillRect(obs.x - 3, obs.y + 6, 3, 5);
+                    dCtx.fillRect(obs.x - 3, obs.y + 4, 2, 2);
+
+                    dCtx.fillRect(obs.x + obs.width, obs.y + 8, 3, 5);
+                    dCtx.fillRect(obs.x + obs.width + 1, obs.y + 6, 2, 2);
+
+                    dCtx.fillStyle = '#ef4444';
+                    dCtx.beginPath();
+                    dCtx.arc(obs.x + obs.width/2, obs.y - 1, 3, 0, Math.PI*2);
+                    dCtx.fill();
+                } else {
+                    dCtx.strokeStyle = '#22c55e';
+                    dCtx.lineWidth = 2.5;
+                    dCtx.beginPath();
+                    dCtx.moveTo(obs.x + obs.width/2, obs.y + obs.height);
+                    dCtx.lineTo(obs.x + obs.width/2, obs.y + 8);
+                    dCtx.stroke();
+
+                    dCtx.fillStyle = '#fef08a';
+                    dCtx.beginPath();
+                    dCtx.arc(obs.x + obs.width/2, obs.y + 6, 5, 0, Math.PI * 2);
+                    dCtx.fill();
+
+                    dCtx.fillStyle = '#fb7185';
+                    for(let angle = 0; angle < Math.PI * 2; angle += Math.PI / 3) {
+                        const px = obs.x + obs.width/2 + Math.cos(angle) * 6;
+                        const py = obs.y + 6 + Math.sin(angle) * 6;
+                        dCtx.beginPath();
+                        dCtx.arc(px, py, 3, 0, Math.PI*2);
+                        dCtx.fill();
+                    }
+                }
+
+                const hitX = (dino.x < obs.x + obs.width && dino.x + dino.width > obs.x);
+                const hitY = (dino.y < obs.y + obs.height && dino.y + dino.height > obs.y);
+
+                if (hitX && hitY) {
+                    endDinoGame();
+                    return;
+                }
+            }
+
+            drawCuteDino(dino.x, dino.y);
+
+            dinoLoopId = requestAnimationFrame(updateDino);
+        }
+
+        function endDinoGame() {
+            dinoActive = false;
+            cancelAnimationFrame(dinoLoopId);
+            playSynthSound(130, 'sawtooth', 0.15, 0.5);
+
+            const kisses = Math.floor(dinoScore * 0.15);
+            let dinoPhrase = "";
+
+            if (dinoScore <= 80) {
+                dinoPhrase = `Que corrida fofa! Você correu <strong>${dinoScore}m</strong> e faturou um dengo especial de <strong>${kisses + 1} abraço bem apertado</strong>! 🤗`;
+            } else if (dinoScore <= 250) {
+                dinoPhrase = `Excelente agilidade! Alcançou <strong>${dinoScore}m</strong> e ganhou um pacote com <strong>${kisses} beijinhos na testa</strong> e cafuné garantido! 😘✨`;
+            } else {
+                dinoPhrase = `Uau, Velocidade da Luz! Correu incríveis <strong>${dinoScore}m</strong> e resgatou <strong>${kisses} cafunés infinitos</strong> e beijo com mordida autorizada! 🦕❤️👑`;
+            }
+
+            const overlay = document.getElementById('dino-start-overlay');
+            overlay.innerHTML = `
+                <p class="text-sm font-bold text-pink-700 mb-1">Fim de Corrida! 🦖</p>
+                <p class="text-xs text-slate-600 px-4 mb-3 text-center leading-relaxed">${dinoPhrase}</p>
+                <button onclick="startDino()" class="py-1.5 px-4 bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold rounded-lg shadow transition-all">Correr de Novo</button>
+            `;
+            overlay.classList.remove('hidden');
+        }
+
+        // --- 10. INTERAÇÃO DO BOTÃO DE FORMULÁRIO ---
+        function handleFormClick(event) {
+            // Efeito de som ao clicar no botão de quiz
+            playSynthSound(600, 'sine', 0.15, 0.3);
+            setTimeout(() => {
+                playSynthSound(800, 'sine', 0.15, 0.4);
+            }, 100);
+
+            // Disparar uma explosão de corações ao redor do botão clicado
+            if (event && event.currentTarget) {
+                const rect = event.currentTarget.getBoundingClientRect();
+                for (let i = 0; i < 12; i++) {
+                    setTimeout(() => {
+                        createFloatingHeart(
+                            rect.left + (rect.width / 2) + (Math.random() * 160 - 80),
+                            rect.top + window.scrollY + (Math.random() * 40 - 20),
+                            ['#ec4899', '#f43f5e', '#fda4af', '#f472b6', '#a855f7'][Math.floor(Math.random() * 5)]
+                        );
+                    }, i * 40);
+                }
+            }
+        }
     </script>
 </body>
 </html>
